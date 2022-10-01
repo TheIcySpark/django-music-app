@@ -1,0 +1,25 @@
+{% extends 'music_music_app/login_base.html' %}
+
+{% block title %}
+    <title>Create account</title>
+{% endblock %}
+
+{% block form %}
+    <div class="d-flex flex-column container w-25">
+        <div class="text-center">
+            <h4>Create account</h4>
+        </div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form }}
+            <br>
+            <div class="d-flex">
+                <input type="submit" value="submit" class="btn btn-primary flex-fill">
+            </div>
+        </form>
+        <div class="text-center">
+            <h4>Have an account?</h4>
+        </div>
+    <a class="btn btn-info flex-fill" href="{% url 'music_music_app:login' %}">Login</a>
+    </div>
+{% endblock %}

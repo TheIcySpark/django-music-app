@@ -1,0 +1,43 @@
+{% extends 'music_music_app/login_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Login</title>
+{% endblock %}
+
+{% block form %}
+    <div class="d-flex flex-column container w-25">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="text-center alert alert-success">
+                        {{ message }}
+                    </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                    <div class="text-center alert alert-warning">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="text-center">
+            <h4>Login</h4>
+        </div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form }}
+            <div>
+                <a href="">
+                    <h6>Forgot your password?</h6>
+                </a>
+            </div>
+            <div class="d-flex flex-fill">
+                <input type="submit" value="submit" class="btn btn-primary flex-fill">
+            </div>
+        </form>
+        <div class="text-center">
+            <h4>Don't have an account?</h4>
+        </div>
+        <a class="btn btn-info" href="{% url 'music_music_app:create_account' %}">Create account</a>
+    </div>
+{% endblock %}

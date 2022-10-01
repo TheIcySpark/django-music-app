@@ -1,0 +1,13 @@
+{% extends 'music_music_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <div class="d-flex justify-content-center container">
+        <img src="{% static 'music_music_app/logo.svg' %}" class="rounded col-sm-4" alt="">
+    </div>
+    <hr>
+    {% block form %} {% endblock %}
+    <hr>
+{% endblock %}
+

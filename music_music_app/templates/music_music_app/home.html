@@ -1,0 +1,29 @@
+{% extends 'music_music_app/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 bg-danger overflow-auto align-self-start">
+                <hr>
+            </div>
+            <div class="col bg-success">
+                b
+            </div>
+        </div>
+        <div>
+            <img src="{% static 'music_music_app/logo.svg' %}">
+            <br>
+            <img src="{% static 'music_music_app/play-button.png' %}">
+            <br>
+            <img src="{% static 'music_music_app/play-button.png' %}">
+        </div>
+        <div class="position-sticky bottom-0 bg-success align-items-center d-flex justify-content-center" style="max-height: 75px">
+            <img class="" style="max-height: 75px" src="{% static 'music_music_app/previous-button1.png' %}">
+            <img class="" style="max-height: 75px" src="{% static 'music_music_app/play-button.png' %}">
+            <img class="" style="max-height: 75px" src="{% static 'music_music_app/next-button.png' %}">
+        </div>
+    </div>
+{% endblock %}
+
