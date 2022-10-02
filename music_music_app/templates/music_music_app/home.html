@@ -3,27 +3,22 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2 bg-danger overflow-auto align-self-start">
-                <hr>
-            </div>
-            <div class="col bg-success">
-                b
-            </div>
+    <div class="" style="">
+        <div class="p-1" style="overflow-y: scroll; overflow-x: hidden; display: inline-block; height: 82%; width: 19%">
+            <button class="btn btn-info">
+                Settings
+            </button>
         </div>
-        <div>
-            <img src="{% static 'music_music_app/logo.svg' %}">
-            <br>
-            <img src="{% static 'music_music_app/play-button.png' %}">
-            <br>
-            <img src="{% static 'music_music_app/play-button.png' %}">
+        <div class="p-1" style="overflow-y: scroll; display: inline-block; height: 82%; width: 80%">
+            hola
         </div>
-        <div class="position-sticky bottom-0 bg-success align-items-center d-flex justify-content-center" style="max-height: 75px">
-            <img class="" style="max-height: 75px" src="{% static 'music_music_app/previous-button1.png' %}">
-            <img class="" style="max-height: 75px" src="{% static 'music_music_app/play-button.png' %}">
-            <img class="" style="max-height: 75px" src="{% static 'music_music_app/next-button.png' %}">
-        </div>
+    </div>
+    <hr>
+    <div class="position-static bottom-0 align-items-center d-flex justify-content-center"
+         style="height: 10%">
+        <img class="" style="max-height: 75px" src="{% static 'music_music_app/previous-button1.png' %}">
+        <img class="" style="max-height: 75px" src="{% static 'music_music_app/play-button.png' %}">
+        <img class="" style="max-height: 75px" src="{% static 'music_music_app/next-button.png' %}">
     </div>
 {% endblock %}
 
