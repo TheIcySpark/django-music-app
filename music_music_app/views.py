@@ -2,7 +2,14 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from rest_framework import viewsets
+
 from .forms import LoginForm, CreateAccountForm
+from .serializers import UserSerializer
+
+
+class UserCreate(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
 
 
 def login_view(request):

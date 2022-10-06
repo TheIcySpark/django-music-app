@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../book_store_site/.idea/book_store_site.iml" filepath="$PROJECT_DIR$/../book_store_site/.idea/book_store_site.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../music_music_front_end/.idea/music_music_front_end.iml" filepath="$PROJECT_DIR$/../music_music_front_end/.idea/music_music_front_end.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/music_project.iml" filepath="$PROJECT_DIR$/.idea/music_project.iml" />
     </modules>
   </component>

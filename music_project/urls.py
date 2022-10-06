@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-import music_music_app
+from rest_framework import routers
+
+from music_music_app import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('music_music_app.urls'))
 ]
