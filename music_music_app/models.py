@@ -1,9 +1,6 @@
 from django.db import models
 
 
-MEDIA_PATH = 'media/'
-
-
 class Genre(models.Model):
     genre = models.CharField(max_length=50)
 
