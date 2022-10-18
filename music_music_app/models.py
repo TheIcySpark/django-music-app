@@ -33,7 +33,7 @@ class Album(models.Model):
 class Song(models.Model):
     artist = models.ManyToManyField(Artist)
     album = models.ManyToManyField(Album)
-    audio = models.FilePathField(max_length=250)
+    audio = models.CharField(max_length=250)
     name = models.CharField(max_length=100)
     spotify_id = models.CharField(max_length=50)
 
@@ -49,6 +49,7 @@ class Playlist(models.Model):
 class UserData(models.Model):
     subscription_type = models.BooleanField(default=False)
     subscription_expiration_date = models.DateField()
+    playlist_shortcuts = models.ManyToManyField(Playlist)
 
 
 class SubscriptionCode(models.Model):
