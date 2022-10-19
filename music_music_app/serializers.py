@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from music_music_app.models import Genre, Artist, Album, Song
+from music_music_app.models import Genre, Artist, Album, Song, UserData, Playlist
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -32,5 +32,17 @@ class SongSerializer(serializers.ModelSerializer):
         fields = ('id', 'album', 'artist', 'name', 'spotify_id', 'audio')
 
 
-class SongFileSerializer(serializers.Serializer):
-    file = serializers.FileField()
+class PlaylistSerializer(serializers.ModelSerializer):
+    songs = SongSerializer(many=True, required=False)
+
+    class Meta:
+        model = Playlist
+        fields = '__all__'
+
+
+class UserDataSerializer(serializers.ModelSerializer):
+    playlist_shortcuts = PlaylistSerializer(many=True, required=False)
+    class Meta:
+        model = UserData
+        fields = '__all__'
+

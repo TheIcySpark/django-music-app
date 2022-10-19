@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -42,14 +43,15 @@ class Song(models.Model):
 
 
 class Playlist(models.Model):
-    song = models.ManyToManyField(Song)
-    name = models.CharField(max_length=100)
+    songs = models.ManyToManyField(Song)
+    name = models.CharField(max_length=16)
 
 
 class UserData(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    playlist_shortcuts = models.ManyToManyField(Playlist)
     subscription_type = models.BooleanField(default=False)
     subscription_expiration_date = models.DateField()
-    playlist_shortcuts = models.ManyToManyField(Playlist)
 
 
 class SubscriptionCode(models.Model):
