@@ -10,7 +10,7 @@ class GenreSerializer(serializers.ModelSerializer):
 
 
 class ArtistSerializer(serializers.ModelSerializer):
-    genre = GenreSerializer(many=True, required=False)
+    genres = GenreSerializer(many=True, required=False)
 
     class Meta:
         model = Artist

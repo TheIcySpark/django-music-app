@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import FileResponse, HttpResponse
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from music_music_app.models import Song, Genre, Artist, Album, Playlist, UserData
 from music_music_app.serializers import SongSerializer, GenreSerializer, ArtistSerializer, AlbumSerializer, \
@@ -33,6 +34,17 @@ class SongViewSet(viewsets.ModelViewSet):
 class PlaylistViewSet(viewsets.ModelViewSet):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
+
+    def create(self, request, *args, **kwargs):
+        body = json.loads(request.body.decode('utf-8'))
+        playlist = Playlist(owner=request.user, name=body['name'], public=body['public'])
+        playlist.save()
+        return HttpResponse('')
+
+    def list(self, request, *args, **kwargs):
+        playlists = Playlist.objects.filter(owner=request.user)
+        serializer = PlaylistSerializer(playlists, many=True)
+        return Response(serializer.data)
 
 
 class UserDataViewSet(viewsets.ModelViewSet):

@@ -9,6 +9,22 @@ CLIENT_ID = 'be2108011bf94d9a8346f07f0d9c5d3a'
 CLIENT_SECRET = '6445e90e8e234273bc0e35246897e1df'
 
 
+def get_higher_resolution_image(request, section='', in_section=True):
+    array = []
+    if not in_section:
+        array = request['images']
+    else:
+        array = request[section]['images']
+
+    higher_resolution = 0
+    higher_resolution_image_url = ''
+    for image_data in array:
+        if image_data['height'] > higher_resolution:
+            higher_resolution_image_url = image_data['url']
+            higher_resolution = image_data['height']
+    return higher_resolution_image_url
+
+
 class Command(BaseCommand):
     help = 'Download the song with the spotify id provided'
 
@@ -40,7 +56,7 @@ class Command(BaseCommand):
             Album.objects.create(name=request['album']['name'], type=request['album']['album_type'],
                                  total_songs=request['album']['total_tracks'],
                                  release_date=request['album']['release_date'],
-                                 image_url=request['album']['images'][0]['url'],
+                                 image_url=get_higher_resolution_image(request, 'album'),
                                  spotify_id=request['album']['id'])
         song.save()
         song.album.add(Album.objects.get(spotify_id=request['album']['id']))
@@ -53,7 +69,8 @@ class Command(BaseCommand):
                     if not Genre.objects.filter(genre=artist_genre):
                         Genre.objects.create(genre=artist_genre)
 
-                artist = Artist(name=request_artist['name'], image_url=request_artist['images'][0]['url'],
+                artist = Artist(name=request_artist['name'],
+                                image_url=get_higher_resolution_image(request_artist, in_section=False),
                                 spotify_id=request_artist['id'])
                 artist.save()
 

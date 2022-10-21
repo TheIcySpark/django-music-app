@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -43,15 +45,17 @@ class Song(models.Model):
 
 
 class Playlist(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     songs = models.ManyToManyField(Song)
     name = models.CharField(max_length=16)
+    public = models.BooleanField(default=False)
 
 
 class UserData(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     playlist_shortcuts = models.ManyToManyField(Playlist)
     subscription_type = models.BooleanField(default=False)
-    subscription_expiration_date = models.DateField()
+    subscription_expiration_date = models.DateField(default=datetime.today())
 
 
 class SubscriptionCode(models.Model):
