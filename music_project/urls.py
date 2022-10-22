@@ -18,5 +18,6 @@ urlpatterns = [
     path('api/song_audio_file/<int:song_id>', views.song_audio_file),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.authtoken')),
-    path('api/create_account/', views.create_user_view)
+    path('api/create_account/', views.create_user_view),
+    path('api/add_song_to_playlist/', views.add_song_to_playlist)
 ]

@@ -46,10 +46,33 @@ class PlaylistViewSet(viewsets.ModelViewSet):
         serializer = PlaylistSerializer(playlists, many=True)
         return Response(serializer.data)
 
+    def retrieve(self, request, pk=None):
+        songs = Playlist.objects.get(id=pk).songs.all()
+        bar = songs
+        print(bar)
+        page = self.paginate_queryset(songs)
+        serializer = SongSerializer(songs, many=True)
+        return self.get_paginated_response(serializer.data)
+
+
+class PlaylistSongsViewSet(viewsets.ModelViewSet):
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+
 
 class UserDataViewSet(viewsets.ModelViewSet):
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer
+
+
+@api_view(['POST'])
+def add_song_to_playlist(request):
+    body = json.loads(request.body.decode('utf-8'))
+    playlist = Playlist.objects.get(id=body['playlist_id'], owner=request.user)
+    song = Song.objects.get(id=body['song_id'])
+    playlist.songs.add(song)
+    playlist.save()
+    return HttpResponse('')
 
 
 @api_view(['POST'])
