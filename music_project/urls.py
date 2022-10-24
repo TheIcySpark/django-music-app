@@ -19,5 +19,6 @@ urlpatterns = [
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.authtoken')),
     path('api/create_account/', views.create_user_view),
-    path('api/add_song_to_playlist/', views.add_song_to_playlist)
+    path('api/add_song_to_playlist/', views.add_song_to_playlist),
+    path('api/delete_song_from_playlist/', views.delete_song_from_playlist),
 ]

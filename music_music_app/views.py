@@ -48,8 +48,6 @@ class PlaylistViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         songs = Playlist.objects.get(id=pk).songs.all()
-        bar = songs
-        print(bar)
         page = self.paginate_queryset(songs)
         serializer = SongSerializer(songs, many=True)
         return self.get_paginated_response(serializer.data)
@@ -76,8 +74,19 @@ def add_song_to_playlist(request):
 
 
 @api_view(['POST'])
+def delete_song_from_playlist(request):
+    body = json.loads(request.body.decode('utf-8'))
+    playlist = Playlist.objects.get(id=body['playlist_id'], owner=request.user)
+    song = Song.objects.get(id=body['song_id'])
+    playlist.songs.remove(song)
+    return HttpResponse('')
+
+
+@api_view(['POST'])
 def create_user_view(request):
     body = json.loads(request.body.decode('utf-8'))
+    if body['password'] == '':
+        return HttpResponse('', status=400)
     user = User.objects.create_user(body['username'], body['email'], body['password'])
     user.save()
     user_data = UserData(user=user)
