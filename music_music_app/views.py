@@ -30,6 +30,13 @@ class SongViewSet(viewsets.ModelViewSet):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
+    def get_queryset(self):
+        song_name = self.request.query_params.get('name', '')
+        if song_name != '':
+            return self.queryset.filter(name__icontains=song_name)
+        else:
+            return self.queryset
+
 
 class PlaylistViewSet(viewsets.ModelViewSet):
     queryset = Playlist.objects.all()
@@ -47,7 +54,12 @@ class PlaylistViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        songs = Playlist.objects.get(id=pk).songs.all()
+        song_name = self.request.query_params.get('name', '')
+        songs = []
+        if song_name != '':
+            songs = Playlist.objects.get(id=pk).songs.filter(name__icontains=song_name)
+        else:
+            songs = Playlist.objects.get(id=pk).songs.all()
         page = self.paginate_queryset(songs)
         serializer = SongSerializer(songs, many=True)
         return self.get_paginated_response(serializer.data)
