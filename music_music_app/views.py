@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.models import User
 from django.http import FileResponse, HttpResponse
+from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -112,3 +113,7 @@ def song_audio_file(request, song_id):
     response = FileResponse(file)
     response['Accept-Ranges'] = 'bytes'
     return response
+
+
+def index(request):
+    return render(request, 'index.html')

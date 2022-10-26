@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/create_account/', views.create_user_view),
     path('api/add_song_to_playlist/', views.add_song_to_playlist),
     path('api/delete_song_from_playlist/', views.delete_song_from_playlist),
+    path('', include('music_music_frontend.urls'))
 ]

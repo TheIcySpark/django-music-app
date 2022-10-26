@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import os
 from pathlib import Path
 
 import music_music_app
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-z9a1=f29lcjiy2nzyjxdjq$*6ha#iz!imuk(9ue6-f#u072%kh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -36,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'music_music_app.apps.MusicMusicAppConfig',
 
+    'music_music_frontend',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -61,7 +64,7 @@ ROOT_URLCONF = 'music_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'templates', os.path.join(BASE_DIR, 'music_music_frontend/build')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -132,10 +135,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'http://localhost:8000'
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://localhost:8000'
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -147,3 +153,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
 }
+
+STATICFILES_DIRS = [
+    os.path.join(os.path.join(BASE_DIR, 'music_music_frontend'), 'build', 'static'),
+    os.path.join(BASE_DIR, 'music_music_frontend/build/static')
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
