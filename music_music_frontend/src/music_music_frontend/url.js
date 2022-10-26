@@ -1,2 +1,2 @@
-let BASE = 'https://76e9-148-215-241-128.ngrok.io/'
+let BASE = 'http://127.0.0.1:8000/'
 export default BASE

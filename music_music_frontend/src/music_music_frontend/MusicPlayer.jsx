@@ -140,7 +140,8 @@ function MusicPlayer(props) {
                         <Input
                             placeholder='Search song'
                             onChange={(event) => {
-                                fetchSongs(currentPlaylistUrl,'?name=' + event.target.value)
+                                let playlistUrl = currentPlaylistUrl.split('?')[0]
+                                fetchSongs(playlistUrl,'?name=' + event.target.value)
                             }}
                         />
                     </InputGroup>

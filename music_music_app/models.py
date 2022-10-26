@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Genre(models.Model):
-    genre = models.CharField(max_length=50)
+    genre = models.CharField(max_length=100)
 
     def __str__(self):
         return self.genre
@@ -13,7 +13,7 @@ class Genre(models.Model):
 
 class Artist(models.Model):
     genres = models.ManyToManyField(Genre)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     image_url = models.CharField(max_length=500)
     spotify_id = models.CharField(max_length=50)
 
@@ -22,8 +22,8 @@ class Artist(models.Model):
 
 
 class Album(models.Model):
-    name = models.CharField(max_length=100)
-    type = models.CharField(max_length=50)
+    name = models.CharField(max_length=250)
+    type = models.CharField(max_length=100)
     total_songs = models.IntegerField()
     release_date = models.CharField(max_length=100)
     image_url = models.CharField(max_length=500)
@@ -37,7 +37,7 @@ class Song(models.Model):
     artist = models.ManyToManyField(Artist)
     album = models.ManyToManyField(Album)
     audio = models.CharField(max_length=250)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     spotify_id = models.CharField(max_length=50)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Song(models.Model):
 class Playlist(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     songs = models.ManyToManyField(Song)
-    name = models.CharField(max_length=16)
+    name = models.CharField(max_length=30)
     public = models.BooleanField(default=False)
 
     def __str__(self):
@@ -58,7 +58,7 @@ class UserData(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     playlist_shortcuts = models.ManyToManyField(Playlist)
     subscription_type = models.BooleanField(default=False)
-    subscription_expiration_date = models.DateField(default=datetime.today())
+    subscription_expiration_date = models.DateField(default=datetime.today)
 
 
 class SubscriptionCode(models.Model):

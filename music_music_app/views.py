@@ -5,6 +5,7 @@ from django.http import FileResponse, HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from music_music_app.models import Song, Genre, Artist, Album, Playlist, UserData
@@ -61,9 +62,11 @@ class PlaylistViewSet(viewsets.ModelViewSet):
             songs = Playlist.objects.get(id=pk).songs.filter(name__icontains=song_name)
         else:
             songs = Playlist.objects.get(id=pk).songs.all()
-        page = self.paginate_queryset(songs)
-        serializer = SongSerializer(songs, many=True)
-        return self.get_paginated_response(serializer.data)
+        paginator = PageNumberPagination()
+        paginator.page_size = 10
+        result_page = paginator.paginate_queryset(songs, request)
+        serializer = SongSerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
 
 class PlaylistSongsViewSet(viewsets.ModelViewSet):

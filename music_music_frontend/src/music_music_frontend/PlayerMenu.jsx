@@ -105,7 +105,7 @@ function PlayerMenu(props) {
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Playlist name</FormLabel>
-                            <Input defaultValue={playlistSelectedToUpdate.name} id='updatePlaylistName' />
+                            <Input maxLength={30} defaultValue={playlistSelectedToUpdate.name} id='updatePlaylistName' />
                         </FormControl>
 
                         <FormControl mt={4}>
@@ -196,7 +196,7 @@ function PlayerMenu(props) {
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Playlist name</FormLabel>
-                            <Input id='newPlaylistName' />
+                            <Input maxLength={30} id='newPlaylistName' />
                         </FormControl>
 
                     </ModalBody>
