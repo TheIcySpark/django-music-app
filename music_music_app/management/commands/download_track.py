@@ -1,13 +1,17 @@
 import requests
 import pytube
+import os
+from dotenv import load_dotenv
+
 from django.core.management import BaseCommand
 from music_music_app.models import Genre, Album, Artist, Song
 
+load_dotenv()
+
 BASE_URL = 'https://api.spotify.com/v1/'
 BASE_URL_DOWNLOAD = 'https://open.spotify.com/track/'
-CLIENT_ID = 'be2108011bf94d9a8346f07f0d9c5d3a'
-CLIENT_SECRET = '6445e90e8e234273bc0e35246897e1df'
-
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 
 def get_higher_resolution_image(request, section='', in_section=True):
     array = []
