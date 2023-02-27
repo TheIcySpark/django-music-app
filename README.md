@@ -1,4 +1,4 @@
-# Music Music
+# Web Music Player
 
 ## Build with
 
